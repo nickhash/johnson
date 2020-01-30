@@ -1,0 +1,11 @@
+[package]
+name = "johnson"
+version = "1.0.0"
+edition = "2018"
+
+[lib]
+name = "johnson"
+path = "src/lib.rs"
+
+[dependencies]
+petgraph = "0.5.0"
