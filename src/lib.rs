@@ -19,7 +19,7 @@ pub fn johnson<N,E,Ty,Ix>(orig_graph: &Graph<N,E,Ty,Ix>, start: NodeIndex<Ix>, g
 		N: Default + Debug,
 		E: FloatMeasure + Debug + Sub<Output=E> + Add<Output=E> + Default + Measure,
 		Ty: EdgeType,
-        Ix: IndexType,
+		Ix: IndexType,
 		Graph<N, E, Ty, Ix> : Clone,
 {
 	// Preparation. Cloning the graph is a requirement as all the edges will have to be altered
@@ -59,10 +59,6 @@ pub fn johnson<N,E,Ty,Ix>(orig_graph: &Graph<N,E,Ty,Ix>, start: NodeIndex<Ix>, g
 
 	// Step 3. Re-weigth the graph to eliminate negative weight (using previous calculations)
 	let edge_indices: Vec<EdgeIndex<Ix>> = graph.edge_indices().collect();
-	let mut previous_weights: Vec<E> = Vec::new();
-	for eidx in &edge_indices {
-		previous_weights.push(*graph.edge_weight(*eidx).unwrap());
-	}
 	for eidx in edge_indices {
 		let (src_vertex,dst_vertex) = graph.edge_endpoints(eidx).unwrap();
 		let previous_weight = *graph.edge_weight(eidx).unwrap();
